@@ -1,5 +1,6 @@
 // import controllers
 const userController=require('../Controllers/userController')
+const projectController=require('../Controllers/projectController')
 
 //1) import express
 const express=require('express');
@@ -13,6 +14,9 @@ router.post('/user/register',userController.registerUser)
 
 //3.2)user login
 router.post("/user/login",userController.loginUser)
+
+//3.3 Add Project
+router.post('project/add',projectController.addProject)
 // 4)export router
 module.exports=router;
 
