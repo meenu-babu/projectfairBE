@@ -1,6 +1,10 @@
 // import controllers
 const userController=require('../Controllers/userController')
 const projectController=require('../Controllers/projectController')
+const jwtMiddleware=require('../Middlewares/jwtMiddleWare')
+const multerConfig=require('../Middlewares/multerMiddleWare')
+
+
 
 //1) import express
 const express=require('express');
@@ -16,7 +20,18 @@ router.post('/user/register',userController.registerUser)
 router.post("/user/login",userController.loginUser)
 
 //3.3 Add Project
-router.post('project/add',projectController.addProject)
+router.post('/project/add',jwtMiddleware,multerConfig.single('projectImage'),projectController.addProject)
+
+//3.4 Get home projects
+router.get('/project/homeproject',projectController.getHomeProject)
+
+//3.5 Get all project
+router.get('/project/allproject',jwtMiddleware,projectController.getAllProject)
+
+
+//3.6 get user projects
+router.get('/project/userproject',jwtMiddleware,projectController.getUserProject)
+
 // 4)export router
 module.exports=router;
 
