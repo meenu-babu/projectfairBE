@@ -5,7 +5,6 @@ const jwtMiddleware=require('../Middlewares/jwtMiddleWare')
 const multerConfig=require('../Middlewares/multerMiddleWare')
 
 
-
 //1) import express
 const express=require('express');
 
