@@ -31,6 +31,9 @@ router.get('/project/allproject',jwtMiddleware,projectController.getAllProject)
 //3.6 get user projects
 router.get('/project/userproject',jwtMiddleware,projectController.getUserProject)
 
+//update project
+router.put('/project/edit/:id',jwtMiddleware,multerConfig.single('projectImage'),projectController.updateUserProject)
+
 // 4)export router
 module.exports=router;
 

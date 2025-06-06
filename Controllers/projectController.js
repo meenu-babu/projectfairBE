@@ -97,3 +97,34 @@ exports.getUserProject=async(req,res)=>{
         res.status(401).json(err)
     }
     }
+
+
+    //update user project
+    exports.updateUserProject=async(req,res)=>{
+        const {id}=req.params
+        const userId=req.payload
+        const {title,language,githubLink,websiteLink,overview,projectImage}=req.body
+        console.log("Inside update project")
+        console.log(id);
+        console.log(userId);
+        console.log(title,language,githubLink,websiteLink,overview,projectImage)
+        const uploadprojectimage=req.file?req.file.filename:projectImage
+        try{
+                const updateProject=await projects.findByIdAndUpdate({_id:id},{
+                    title:title,
+                    language:language,
+                    github:githubLink,
+                    website:websiteLink,
+                    overview:overview,
+                    projectImage:uploadprojectimage,
+                    userId:userId
+                },{
+                    new:true   //used to define update
+                })
+                await updateProject.save();
+                res.status(200).json(updateProject)
+        }
+        catch(err){
+                res.status(401).json(err)
+        }
+    }
