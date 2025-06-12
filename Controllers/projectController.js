@@ -128,3 +128,17 @@ exports.getUserProject=async(req,res)=>{
                 res.status(401).json(err)
         }
     }
+
+    //delete user project
+    exports.deleteProject=async(req,res)=>{
+        const {id}=req.params
+        try{
+                const removeproject=await await projects.findByIdAndDelete({_id:id})
+                res.status(200).json(removeproject)
+        }
+        catch(error){
+            res.status(401).json(error)
+
+        }
+
+    }
